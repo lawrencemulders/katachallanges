@@ -1,0 +1,20 @@
+using System;
+using System.Collections.Generic;
+
+public class ProdFib
+{
+    public static ulong[] productFib(ulong prod)
+    {
+        List<ulong> fibList = new List<ulong> { 0, 1 };
+
+        while (fibList[fibList.Count - 1] * fibList[fibList.Count - 2] < prod)
+        {
+            ulong newFib = fibList[fibList.Count - 1] + fibList[fibList.Count - 2];
+            fibList.Add(newFib);
+        }
+
+        bool isProduct = fibList[fibList.Count - 1] * fibList[fibList.Count - 2] == prod;
+
+        return new ulong[] { fibList[fibList.Count - 2], fibList[fibList.Count - 1], isProduct ? 1UL : 0UL };
+    }
+}
