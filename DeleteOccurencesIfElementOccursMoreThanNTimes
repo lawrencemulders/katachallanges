@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Kata {
+    public static int[] DeleteNth(int[] arr, int x) 
+    {
+        // Use ToList() to create a copy of the original array
+        List<int> numbersList = arr.ToList();
+        
+        // Loop through the distinct elements of the array
+        foreach (int num in arr.Distinct())
+        {
+            // Count the occurrences of the current element
+            int count = numbersList.Count(n => n == num);
+            
+            // Check if the count is greater than x
+            if (count > x)
+            {
+                // Remove excess occurrences beyond x
+                for (int i = numbersList.Count - 1; i >= 0; i--)
+                {
+                    if (numbersList[i] == num)
+                    {
+                        numbersList.RemoveAt(i);
+                        count--;
+                        if (count == x)
+                            break;
+                    }
+                }
+            }
+        }
+        return numbersList.ToArray(); // Convert the List back to an array and return it
+    }
+}
