@@ -1,0 +1,37 @@
+namespace Solution
+{
+using System.Numerics;
+
+class LastDigit
+{
+    public static int GetLastDigit(BigInteger n1, BigInteger n2)
+    {
+        if (n2 == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            BigInteger result = CustomPow(n1, n2);
+            return (int)(result % 10);
+        }
+    }
+
+    static BigInteger CustomPow(BigInteger n1, BigInteger n2)
+    {
+        BigInteger result = 1;
+        while (n2 > 0)
+        {
+            if (n2 % 2 == 1) // for bit = 1
+            {
+                result *= n1;
+                result %= 10; // Keep only the last digit to prevent overflow.
+            }
+            n1 *= n1; // Repeated squaring w.r.t. n2 -> from right to left in binary 
+            n1 %= 10; // Keep only the last digit to prevent overflow
+            n2 /= 2; // Remove each iterated binary digit
+        }
+        return result;
+    }
+}
+}
