@@ -1,0 +1,44 @@
+sing System;
+using System.Collections.Generic;
+
+public class HumanTimeFormat{
+  public static string formatDuration(int seconds){
+    {
+        if (seconds == 0)
+            return "now";
+
+        int years = seconds / (365 * 24 * 60 * 60);
+        int days = (seconds % (365 * 24 * 60 * 60)) / (24 * 60 * 60);
+        int hours = (seconds % (24 * 60 * 60)) / (60 * 60);
+        int minutes = (seconds % (60 * 60)) / 60;
+        int remainingSeconds = seconds % 60;
+
+        List<string> parts = new List<string>();
+
+        if (years > 0)
+            parts.Add(years == 1 ? "1 year" : years + " years");
+
+        if (days > 0)
+            parts.Add(days == 1 ? "1 day" : days + " days");
+
+        if (hours > 0)
+            parts.Add(hours == 1 ? "1 hour" : hours + " hours");
+
+        if (minutes > 0)
+            parts.Add(minutes == 1 ? "1 minute" : minutes + " minutes");
+
+        if (remainingSeconds > 0)
+            parts.Add(remainingSeconds == 1 ? "1 second" : remainingSeconds + " seconds");
+
+        string result = string.Join(", ", parts);
+
+        if (parts.Count > 1)
+        {
+            int lastIndex = result.LastIndexOf(", ");
+            result = result.Substring(0, lastIndex) + " and" + result.Substring(lastIndex + 1);
+        }
+
+        return result;
+    }
+}
+}
